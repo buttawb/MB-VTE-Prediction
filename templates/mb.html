@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Major Bleeding</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+
+</head>
+<body>
+
+  <style>.center {
+    margin: auto;
+    width: 50%;
+    border: 5px solid rgb(0, 0, 0);
+    padding: 10px;
+  }</style>
+
+<!-- Header -->
+<header class="w3-container w3-theme w3-padding" id="myHeader">
+  <div class="w3-center">
+
+  <h1 class="w3-xxxlarge w3-animate-bottom">Major Bleeding</h1>
+
+</div>
+</header>
+<br>
+<style>
+h2 { 
+    text-align: center;
+}</style>
+<div class="w3-row-padding w3-margin-top; center">
+    <form class="w3-container w3-card-4">
+        
+      <h2>Input Data</h2>
+      <div class="w3-section">      
+        <input class="w3-input" type="text" name = 'n'required="" placeholder="Enter...">
+        <label>The amount of Neutrophils</label>
+      </div>
+      <div class="w3-section">      
+        <input class="w3-input" type="text" name = 'l'required="" placeholder="Enter...">
+        <label>The amount of Lymphocytes</label>
+      </div>
+      <div class="w3-section">      
+        <input class="w3-input" type="text" name = 'p'required="" placeholder="Enter...">
+        <label>The amount of Platelets</label>
+      </div>
+    <br>
+    <div class="w3-container">
+
+        <div class="w3-light-gray">
+          <div id="myBar" class="w3-center w3-padding w3-theme" style="width: 0%;">0%</div>
+        </div><br>
+        <button type = submit class="w3-btn w3-theme" onclick="move()">Start Prediction</button> 
+        </div>
+        <div class="w3-container">
+          <hr>
+          <div class="w3-center">
+            <h2>Probability Table</h2>
+
+          </div>
+        <div >
+        <table class="w3-table w3-striped w3-bordered" width='10px'>
+        <thead>
+        <tr class="w3-theme">
+          <th>Positive</th>
+          <th>Negative</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>{{result}}</td>
+          <td>{{result1}}</td>
+        </tr>
+        <tr>
+        </tr>
+        </tbody>
+        </table>
+        </div>
+        
+        <br>
+      </div>
+    
+    </form>
+    </div>
+    <br><br>
+    <div class="w3-left" style='padding-left: 5%; padding-bottom:2%'>
+      <br>
+      <a class="w3-button w3-theme" type = button onClick="location.href='/'" style='margin-bottom: 10%'>Back to main</a>
+    </div>
+
+<script>
+// Progress Bars
+function move() {
+  var elem = document.getElementById("myBar");   
+  var width = 5;
+  var id = setInterval(frame, 10);
+  function frame() {
+    if (width == 100) {
+      clearInterval(id);
+    } else {
+      width++; 
+      elem.style.width = width + '%'; 
+      elem.innerHTML = width * 1  + '%';
+    }
+  }
+}
+</script>
+
+</body>
+</html>
