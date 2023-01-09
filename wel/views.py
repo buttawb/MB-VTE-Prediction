@@ -3,9 +3,9 @@ from django.http import HttpResponse
 from django.shortcuts import render
 import pandas as pd
 
-
 from joblib import Parallel, delayed
 import joblib
+
 
 def m(request):
     feat1 = 0
@@ -24,10 +24,11 @@ def m(request):
         feat3 = v3
         final = mortality(feat1, feat2, feat3)
         result = final[0]
-        result1 = final[1]        
+        result1 = final[1]
     except:
         pass
-    return render(request, 'm.html',{'result': result, 'result1': result1})       
+    return render(request, 'm.html', {'result': result, 'result1': result1})
+
 
 def mb(request):
     feat1 = 0
@@ -46,10 +47,11 @@ def mb(request):
         feat3 = v3
         final = majorbleeding(feat1, feat2, feat3)
         result = final[0]
-        result1 = final[1]        
+        result1 = final[1]
     except:
         pass
-    return render(request, 'mb.html',{'result': result, 'result1': result1})
+    return render(request, 'mb.html', {'result': result, 'result1': result1})
+
 
 def v(request):
     feat1 = 0
@@ -68,63 +70,63 @@ def v(request):
         feat3 = v3
         final = vte(feat1, feat2, feat3)
         result = final[0]
-        result1 = final[1]        
+        result1 = final[1]
     except:
         pass
-    return render(request, 'vte.html',{'result': result, 'result1': result1})
+    return render(request, 'vte.html', {'result': result, 'result1': result1})
 
-    
 
 def main(request):
     return render(request, 'main.html')
+
 
 def mortality(v1, v2, v3):
     feat1 = v1
     feat2 = v2
     feat3 = v3
-    if feat1!='' and feat2!='' and feat3!='':
-        feat1=float(feat1)
-        feat2=float(feat2)
-        feat3=float(feat3)
-        Ratio1_NLR=feat1/feat2
-        Ratio2_PLR=feat3/feat2
-        Ratio3_SII=(feat1*feat3)/feat2
-        
-        cl=joblib.load('./S.pkl')
-        
-        prediction=cl.predict_proba([[Ratio3_SII]])
+    if feat1 != '' and feat2 != '' and feat3 != '':
+        feat1 = float(feat1)
+        feat2 = float(feat2)
+        feat3 = float(feat3)
+        Ratio1_NLR = feat1 / feat2
+        Ratio2_PLR = feat3 / feat2
+        Ratio3_SII = (feat1 * feat3) / feat2
+
+        cl = joblib.load('./S.pkl')
+
+        prediction = cl.predict_proba([[Ratio3_SII]])
         return prediction[0]
+
 
 def majorbleeding(v1, v2, v3):
     feat1 = v1
     feat2 = v2
     feat3 = v3
-    if feat1!='' and feat2!='' and feat3!='':
-        feat1=float(feat1)
-        feat2=float(feat2)
-        feat3=float(feat3)
-        Ratio1_NLR=feat1/feat2
-        Ratio2_PLR=feat3/feat2
-        Ratio3_SII=(feat1*feat3)/feat2
-        
-        cl=joblib.load('./MB.pkl')
-        prediction=cl.predict_proba([[Ratio2_PLR, Ratio3_SII]])
+    if feat1 != '' and feat2 != '' and feat3 != '':
+        feat1 = float(feat1)
+        feat2 = float(feat2)
+        feat3 = float(feat3)
+        Ratio1_NLR = feat1 / feat2
+        Ratio2_PLR = feat3 / feat2
+        Ratio3_SII = (feat1 * feat3) / feat2
+
+        cl = joblib.load('./MB.pkl')
+        prediction = cl.predict_proba([[Ratio2_PLR, Ratio3_SII]])
         return prediction[0]
-    
+
 
 def vte(v1, v2, v3):
     feat1 = v1
     feat2 = v2
     feat3 = v3
-    if feat1!='' and feat2!='' and feat3!='':
-        feat1=float(feat1)
-        feat2=float(feat2)
-        feat3=float(feat3)
-        Ratio1_NLR=feat1/feat2
-        Ratio2_PLR=feat3/feat2
-        Ratio3_SII=(feat1*feat3)/feat2
-        
-        
-        cl=joblib.load('./VTE.pkl')
-        prediction=cl.predict_proba([[Ratio3_SII]])
+    if feat1 != '' and feat2 != '' and feat3 != '':
+        feat1 = float(feat1)
+        feat2 = float(feat2)
+        feat3 = float(feat3)
+        Ratio1_NLR = feat1 / feat2
+        Ratio2_PLR = feat3 / feat2
+        Ratio3_SII = (feat1 * feat3) / feat2
+
+        cl = joblib.load('./VTE.pkl')
+        prediction = cl.predict_proba([[Ratio3_SII]])
         return prediction[0]
